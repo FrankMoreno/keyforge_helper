@@ -18,9 +18,9 @@ def getCardInfo(session, CARD_LINK):
     for infoRow in cardInfo.find_all('li'):
         attribute = infoRow.strong.get_text()
         attributeValue = infoRow.find(text=True, recursive=False).strip()
-        if 'mber' in attribute:
-            attribute = 'Aember'
-        elif attribute == 'Rarity':
+        # if 'mber' in attribute:
+        #     attribute = 'Aember'
+        if attribute == 'Rarity':
             attributeValue = infoRow.find_all(text=True, recursive=False)[1].strip()
         INFO[attribute] = attributeValue
 
