@@ -10,7 +10,10 @@ const data = require('./data.json');
 
 app.intent('Keyforge Card', (conv, {Card}) => {
     let cardInfo = data[Card];
-    conv.close(cardInfo['Card Text']);
+    let responseString = 'This is a ' + cardInfo['Type'] + ' card. Card Description ' +
+    cardInfo['Card Text'] + '. This card provides ' + 
+    cardInfo['\u00c6mber'] +' ember.';
+    conv.close(responseString);
 });
 
 expressApp.get('/', (req, res) => {
