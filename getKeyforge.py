@@ -35,6 +35,7 @@ def main():
     count = 0
     for card in allCards.find_all('div', class_='kfc__cardlist__card kfc-card'):
         card_name = card.h5.get_text()
+        card_name = card_name.lower()
         CARDS[card_name]=getCardInfo(session, KEYFORGE_COMPENDIUM+card.a['href'])
         count+=1
         if count > 1000000:
