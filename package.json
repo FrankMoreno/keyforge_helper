@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/FrankMoreno/keyforge_helper#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "actions-on-google": "^2.6.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "firebase": "^5.9.2",
+    "firebase-functions": "^2.2.1",
+    "firebase-tools": "^6.5.0"
   }
 }
