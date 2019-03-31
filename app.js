@@ -9,7 +9,8 @@ const port = process.env.PORT || 9000;
 const data = require('./data.json');
 
 app.intent('Keyforge Card', (conv, {Card}) => {
-    conv.close(Card);
+    let cardInfo = data[Card];
+    conv.close(cardInfo['Card Text']);
 });
 
 expressApp.get('/', (req, res) => {
