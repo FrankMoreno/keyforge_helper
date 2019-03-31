@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const expressApp = express().use(bodyParser.json());
 
-const app = dialogflow({debug: true});
 const {dialogflow} = require('actions-on-google');
+const app = dialogflow({debug: true});
 
 const port = process.env.PORT || 9000;
 const data = require('./data.json');
