@@ -16,10 +16,10 @@ app.intent('Keyforge Card', (conv, {Card}) => {
     // Card Description: ${cardInfo['Card Text']}.
     // Aember: ${cardInfo['\u00c6mber']}.`;
 
-    conv.close(`Type: ${cardinfo['Type']}.
-    House: ${cardinfo['House']}.
-    Card Description: ${cardInfo['Card Text']}.
-    Aember: ${cardInfo['\u00c6mber']}.`);
+    conv.close('Type: ' + cardinfo['Type'] + '. House: ' + 
+    cardinfo['House'] + '. Card Description: ' + 
+    cardInfo['Card Text'] + '. Aember: ' + 
+    cardInfo['\u00c6mber'] + '.');
 });
 
 expressApp.get('/', (req, res) => {
