@@ -9,17 +9,14 @@ const port = process.env.PORT || 9000;
 const data = require('./data.json');
 
 app.intent('Keyforge Card', (conv, {Card}) => {
-    let cardName = Card.toLowerCase();
-    let cardInfo = data[cardName];
-    let responseString = `Type: ${cardinfo['Type']}.
-    House: ${cardinfo['House']}.
-    Card Description: ${cardInfo['Card Text']}.
-    Aember: ${cardInfo['\u00c6mber']}.`;
-    conv.close('Hello, world!');
-    // conv.close('Type: ' + cardinfo['Type'] + '. House: ' + 
-    // cardinfo['House'] + '. Card Description: ' + 
-    // cardInfo['Card Text'] + '. Aember: ' + 
-    // cardInfo['\u00c6mber'] + '.');
+    // let cardName = Card.toLowerCase();
+    // let cardInfo = data[cardName];
+    // let responseString = `Type: ${cardinfo['Type']}.
+    // House: ${cardinfo['House']}.
+    // Card Description: ${cardInfo['Card Text']}.
+    // Aember: ${cardInfo['\u00c6mber']}.`;
+    
+    conv.close('Hello, World!');
 });
 
 expressApp.get('/', (req, res) => {
