@@ -14,18 +14,27 @@ app.intent('Keyforge Card', (conv, {Card}) => {
     let cardInfo = data[cardName];
     let responseString = `Type: ${cardInfo['Type']}. 
     House: ${cardInfo['House']}. 
-    Card Description: ${cardInfo['Card Text']}. 
+    Card Description: ${cardInfo['Card Text']} 
     Aember: ${cardInfo['\u00c6mber']}.`;
 
-    conv.ask(responseString + `Would you like to know about another card?`);
+    conv.ask(responseString + '\nWould you like to know about another card?');
 });
 
 expressApp.get('/', (req, res) => {
     res.send('We\'re up!');
 })
 expressApp.get('/cards/:cardName', (req, res) => {
-    let cardName = req.params.cardName;
-    res.json(data[cardName]);
+    let cardName = (req.params.cardName).toLowerCase();
+    // res.json(data[cardName]);
+    // let cardName = Card.toLowerCase();
+    let cardInfo = data[cardName];
+    let responseString = `Type: ${cardInfo['Type']}. 
+    House: ${cardInfo['House']}. 
+    Card Description: ${cardInfo['Card Text']} 
+    Aember: ${cardInfo['\u00c6mber']}.`;
+
+    //conv.ask(responseString + `\nWould you like to know about another card?`);
+    res.send(responseString);
 });
 
 expressApp.get('/cards/', (req, res) => {
