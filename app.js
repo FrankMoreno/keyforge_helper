@@ -17,7 +17,7 @@ app.intent('Keyforge Card', (conv, {Card}) => {
     Card Description: ${cardInfo['Card Text']}. 
     Aember: ${cardInfo['\u00c6mber']}.`;
 
-    conv.close(responseString);
+    conv.ask(responseString + `Would you like to know about another card?`);
 });
 
 expressApp.get('/', (req, res) => {
