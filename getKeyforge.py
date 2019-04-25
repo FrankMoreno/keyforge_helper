@@ -25,6 +25,7 @@ def getCardInfo(session, CARD_LINK):
 
 def main():
     CARDS = {}
+    CARD_NAMES = {"entries": []}
     session = requests.Session()
     KEYFORGE_COMPENDIUM = 'https://keyforge-compendium.com'
 
@@ -34,9 +35,13 @@ def main():
         card_name = card.h5.get_text()
         card_name = card_name.lower()
         CARDS[card_name]=getCardInfo(session, KEYFORGE_COMPENDIUM+card.a['href'])
-
+        CARD_NAMES["entries"].append({"value": card_name, "synonyms": []})
+    
     with open('data.json', 'w') as outfile:
         json.dump(CARDS, outfile)
 
+    with open('Card.json', 'w') as outfile:
+        json.dump(CARD_NAMES, outfile)
+        
 if __name__ == '__main__':
     main()
