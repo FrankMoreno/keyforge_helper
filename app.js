@@ -25,19 +25,16 @@ expressApp.get('/', (req, res) => {
 })
 expressApp.get('/cards/:cardName', (req, res) => {
     let cardName = (req.params.cardName).toLowerCase();
-    // res.json(data[cardName]);
-    // let cardName = Card.toLowerCase();
+    let responseString = {};
     let cardInfo = data[cardName];
-        if(cardInfo) {
-            let responseString = `Type: ${cardInfo['Type']}. 
-            House: ${cardInfo['House']}. 
-            Card Description: ${cardInfo['Card Text']} 
-            Aember: ${cardInfo['\u00c6mber']}.`;
-        } else {
-            responseString = `Sorry, I can't find that card. Is there another card you want to know about?`;
-        }
 
-    //conv.ask(responseString + `\nWould you like to know about another card?`);
+    if(cardInfo) {
+        responseString = `Type: ${cardInfo['Type']}. 
+        House: ${cardInfo['House']}. 
+        Card Description: ${cardInfo['Card Text']} 
+        Aember: ${cardInfo['\u00c6mber']}.`;
+    }
+
     res.send(responseString);
 });
 
