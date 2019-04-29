@@ -29,10 +29,10 @@ expressApp.get('/cards/:cardName', (req, res) => {
     let cardInfo = data[cardName];
 
     if(cardInfo) {
-        responseString = `Type: ${cardInfo['Type']}. 
-        House: ${cardInfo['House']}. 
-        Card Description: ${cardInfo['Card Text']} 
-        Aember: ${cardInfo['\u00c6mber']}.`;
+        responseString = `Type - ${cardInfo['Type']}. 
+        House - ${cardInfo['House']}. 
+        Card Description - ${cardInfo['Card Text']} 
+        Aember - ${cardInfo['\u00c6mber']}.`;
     }
 
     res.send(responseString);
