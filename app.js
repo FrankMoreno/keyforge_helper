@@ -22,7 +22,8 @@ app.intent('Keyforge Card', (conv, {Card}) => {
 
 expressApp.get('/', (req, res) => {
     res.send('We\'re up!');
-})
+});
+
 expressApp.get('/cards/:cardName', (req, res) => {
     let cardName = (req.params.cardName).toLowerCase();
     let responseString = {};
