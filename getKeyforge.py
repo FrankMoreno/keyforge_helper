@@ -34,9 +34,11 @@ class KFCompendiumHandler:
         if response.status_code != 200:
             return {}
         else:
-            cardInfo = BeautifulSoup(response.text, 'html.parser')
-            cardInfo = cardInfo.find('div', class_='kfc__card__info').ul
-            return self.buildInfoObject(cardInfo)
+            responseText = BeautifulSoup(response.text, 'html.parser')
+            cardInfo = responseText.find('div', class_='kfc__card__info').ul
+            info = self.buildInfoObject(cardInfo)
+            info['imgSrc'] = responseText.find('img', class_='card-img-top')['src']
+            return info
 
     def buildInfoObject(self, cardInfo):
         INFO = {}
