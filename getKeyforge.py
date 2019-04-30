@@ -73,18 +73,11 @@ def compileData(card, keyforgeData, kfcHandler, lock):
 def main():
     keyforgeData = KeyforgeData()
     kfcHandler = KFCompendiumHandler()
-    threads = []
-
-    for card in kfcHandler.getCardLinks():
-        lock = threading.Lock()
-        thread = threading.Thread(target=compileData, args=(card, keyforgeData, kfcHandler, lock))
-        threads.append(thread)
-        
-    for x in threads:
-        x.start()
-
-    for x in threads:
-        x.join()
+    lock = threading.Lock()
+    
+    threads = [threading.Thread(target=compileData, args=(card, keyforgeData, kfcHandler, lock)) for card in kfcHandler.getCardLinks()]
+    [thread.start() for thread in threads]
+    [thread.join() for thread in threads]
 
     with open('data.json', 'w') as outfile:
         json.dump(keyforgeData.cards, outfile)
