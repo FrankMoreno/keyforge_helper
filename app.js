@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const expressApp = express().use(bodyParser.json());
 
-const {dialogflow} = require('actions-on-google');
+const {BasicCard, Image, dialogflow} = require('actions-on-google');
 const app = dialogflow({debug: true});
 
 const port = process.env.PORT || 9000;
