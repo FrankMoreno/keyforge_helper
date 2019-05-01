@@ -19,7 +19,7 @@ app.intent('Keyforge Card', (conv, {Card}) => {
     Aember - ${cardInfo['\u00c6mber']}.`;
 
     // conv.ask(responseString + '\nWould you like to hear about another card?');
-    conv.ask('This is dumb: ');
+    // conv.ask('This is dumb: ');
     conv.ask(new BasicCard({
         text: 'Dumb',
         subtitle: 'Sub Dumb',
