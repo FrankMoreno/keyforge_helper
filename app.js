@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const expressApp = express().use(bodyParser.json());
 
-const {BasicCard, Image, dialogflow} = require('actions-on-google');
+const {dialogflow, BasicCard, Image,} = require('actions-on-google');
 const app = dialogflow({debug: true});
 
 const port = process.env.PORT || 9000;
@@ -19,7 +19,7 @@ app.intent('Keyforge Card', (conv, {Card}) => {
     Aember - ${cardInfo['\u00c6mber']}.`;
 
     // conv.ask(responseString + '\nWould you like to hear about another card?');
-    // conv.ask('This is dumb: ');
+    conv.ask('This is dumb: ');
     conv.ask(new BasicCard({
         text: 'Dumb',
         subtitle: 'Sub Dumb',
