@@ -19,8 +19,8 @@ app.intent('Keyforge Card', (conv, {Card}) => {
 
     // conv.ask(responseString + '\nWould you like to hear about another card?');
     conv.ask(new BasicCard({
-        formattedText: responseString,
-        title: cardName,
+        text: 'Dumb',
+        title: 'Dumb',
         // image: new Image({
         //     url: cardInfo['imgSrc'],
         //     alt: cardName
