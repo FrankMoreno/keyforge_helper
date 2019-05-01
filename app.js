@@ -15,7 +15,7 @@ app.intent('Keyforge Card', (conv, {Card}) => {
     let cardInfo = data[cardName];
     let responseString = `Type - ${cardInfo['Type']}.
     House - ${cardInfo['House']}.
-    Card Description - ${cardInfo['Card Text']}.
+    Card Description - ${cardInfo['Card Text']}
     Aember - ${cardInfo['\u00c6mber']}.`;
 
     // conv.ask(responseString + '\nWould you like to hear about another card?');
