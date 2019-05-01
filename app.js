@@ -17,15 +17,16 @@ app.intent('Keyforge Card', (conv, {Card}) => {
     Card Description - ${cardInfo['Card Text']} 
     Aember - ${cardInfo['\u00c6mber']}.`;
 
-    conv.ask(responseString + '\nWould you like to hear about another card?');
-    // conv.ask(new BasicCard({
-    //     text: 'Dumb',
-    //     title: 'Dumb',
-    //     // image: new Image({
-    //     //     url: cardInfo['imgSrc'],
-    //     //     alt: cardName
-    //     // })
-    // }));
+    // conv.ask(responseString + '\nWould you like to hear about another card?');
+    conv.ask(new BasicCard({
+        text: 'Dumb',
+        subtitle: 'Sub Dumb',
+        title: 'Dumb',
+        image: new Image({
+            url: cardInfo['imgSrc'],
+            alt: 'cardName'
+        }),
+    }));
 });
 
 expressApp.get('/', (req, res) => {
