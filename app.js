@@ -13,21 +13,21 @@ const data = require('./data.json');
 app.intent('Keyforge Card', (conv, {Card}) => {
     let cardName = Card.toLowerCase();
     let cardInfo = data[cardName];
-    let responseString = `Type - ${cardInfo['Type']}.
-    House - ${cardInfo['House']}.
-    Card Description - ${cardInfo['Card Text']}
+    let responseString = `Type - ${cardInfo['Type']}.  
+    House - ${cardInfo['House']}.  
+    Card Description - ${cardInfo['Card Text']}  
     Aember - ${cardInfo['\u00c6mber']}.`;
 
-    // conv.ask(responseString + '\nWould you like to hear about another card?');
-    conv.ask('Would you like to hear about another card?');
+    conv.ask(responseString);
     conv.ask(new BasicCard({
-        text: responseString,
+        // text: responseString,
         title: (Card.toUpperCase()),
         image: new Image({
             url: cardInfo['imgSrc'],
             alt: 'cardName'
         }),
     }));
+    conv.ask('Would you like to hear about another card?');
 });
 
 expressApp.get('/', (req, res) => {
