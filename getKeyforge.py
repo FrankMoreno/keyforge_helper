@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import json
 import requests
 import threading
+import time
 
 class KeyforgeData:
     def __init__(self):
@@ -17,10 +18,11 @@ class KeyforgeData:
 class KFCompendiumHandler:
     def __init__(self):
         self.keyforge_url = 'https://keyforge-compendium.com'
+        self.expansion_url = 'https://keyforge-compendium.com'
         self.session = requests.Session()
 
     def getCardLinks(self):
-        response = self.session.get(self.keyforge_url)
+        response = self.session.get(self.expansion_url)
         responseText = BeautifulSoup(response.text, 'html.parser')
         return responseText.find_all('div', class_='kfc__cardlist__card kfc-card')
 
@@ -30,15 +32,16 @@ class KFCompendiumHandler:
     def getCardInfo(self, card):
         card_link = self.keyforge_url+card.a['href']
         response = self.session.get(card_link)
-
-        if response.status_code != 200:
-            return {}
-        else:
-            responseText = BeautifulSoup(response.text, 'html.parser')
-            cardInfo = responseText.find('div', class_='kfc__card__info').ul
-            info = self.buildInfoObject(cardInfo)
-            info['imgSrc'] = responseText.find('img', class_='card-img-top')['src']
-            return info
+        while response.status_code != 200:
+            time.sleep(5)
+            response = self.session.get(card_link)
+        # else:
+        responseText = BeautifulSoup(response.text, 'html.parser')
+        cardInfo = responseText.find('div', class_='kfc__card__info').ul
+        info = self.buildInfoObject(cardInfo)
+        info['imgSrc'] = responseText.find('img', class_='card-img-top')['src']
+        info['cardLink'] = card_link
+        return info
 
     def buildInfoObject(self, cardInfo):
         INFO = {}
@@ -66,17 +69,29 @@ class KFCompendiumHandler:
 
 def compileData(card, keyforgeData, kfcHandler, lock):
     card_key = kfcHandler.getCardName(card)
-    card_value = kfcHandler.getCardInfo(card)
-    lock.acquire()
-    keyforgeData.addToCards(card_key, card_value)
-    keyforgeData.addToCardNames(card_key)
-    lock.release() 
+    if card_key not in keyforgeData.cards:
+        try:
+            card_value = kfcHandler.getCardInfo(card)
+            lock.acquire()
+            keyforgeData.addToCards(card_key, card_value)
+            keyforgeData.addToCardNames(card_key)
+            lock.release()
+        except Exception as e: 
+            print(e)
+            print(card_key)
+    else:
+        print('Repeat:' + card_key) 
 
 def main():
     keyforgeData = KeyforgeData()
     kfcHandler = KFCompendiumHandler()
     lock = threading.Lock()
     
+    threads = [threading.Thread(target=compileData, args=(card, keyforgeData, kfcHandler, lock)) for card in kfcHandler.getCardLinks()]
+    [thread.start() for thread in threads]
+    [thread.join() for thread in threads]
+
+    kfcHandler.expansion_url = 'https://keyforge-compendium.com/cards?utf8=%E2%9C%93&filterrific%5Bsearch_title%5D=&filterrific%5Bsearch_text%5D=&filterrific%5Bwith_traits%5D=&filterrific%5Bwith_power%5D=&filterrific%5Bwith_armor%5D=&filterrific%5Btype_like%5D=&filterrific%5Bhouse_like%5D=&filterrific%5Brarity_like%5D=&filterrific%5Bwith_expansion%5D=2&filterrific%5Bwith_tags%5D=&filterrific%5Bsorted_by%5D=number_asc&commit=Filter+Results'
     threads = [threading.Thread(target=compileData, args=(card, keyforgeData, kfcHandler, lock)) for card in kfcHandler.getCardLinks()]
     [thread.start() for thread in threads]
     [thread.join() for thread in threads]

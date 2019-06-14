@@ -20,7 +20,6 @@ app.intent('Keyforge Card', (conv, {Card}) => {
 
     conv.ask(responseString);
     conv.ask(new BasicCard({
-        // text: responseString,
         title: (Card.toUpperCase()),
         image: new Image({
             url: cardInfo['imgSrc'],
