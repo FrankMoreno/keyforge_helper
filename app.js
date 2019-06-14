@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const expressApp = express().use(bodyParser.json());
 
-const {dialogflow, BasicCard, Image,} = require('actions-on-google');
+const {dialogflow, BasicCard, Image, Button} = require('actions-on-google');
 const app = dialogflow({debug: true});
 
 const port = process.env.PORT || 9000;
@@ -24,6 +24,10 @@ app.intent('Keyforge Card', (conv, {Card}) => {
         image: new Image({
             url: cardInfo['imgSrc'],
             alt: 'cardName'
+        }),
+        buttons: new Button({
+            title: 'Keyforge Compendium',
+            url: cardInfo['cardLink']
         }),
     }));
     conv.ask('Would you like to hear about another card?');
