@@ -13,10 +13,7 @@ const data = require('./data.json');
 app.intent('Keyforge Card', (conv, {Card}) => {
     let cardName = Card.toLowerCase();
     let cardInfo = data[cardName];
-    let responseString = `Type - ${cardInfo['Type']}.  
-    House - ${cardInfo['House']}.  
-    Card Description - ${cardInfo['Card Text']}  
-    Aember - ${cardInfo['\u00c6mber']}.`;
+    let responseString = `Type - ${cardInfo['Type']}.\nHouse - ${cardInfo['House']}.\nCard Description - ${cardInfo['Card Text']}\nAember - ${cardInfo['\u00c6mber']}.`;
 
     conv.ask(responseString);
     conv.ask(new BasicCard({
