@@ -9,6 +9,7 @@ const app = dialogflow({debug: true});
 
 const port = process.env.PORT || 9000;
 const cardData = require('./resources/cardData.json');
+const ruleData = require('./resources/ruleData.json');
 
 app.intent('Keyforge Card', (conv, {Card}) => {
     let cardName = Card.toLowerCase();
@@ -28,6 +29,13 @@ app.intent('Keyforge Card', (conv, {Card}) => {
         }),
     }));
     conv.ask('Would you like to hear about another card or a rule?');
+});
+
+app.intent('Rule Name', (conv, {Rule}) => {
+    let ruleInfo = ruleData[Rule][0];
+
+    conv.ask(ruleInfo);
+    conv.ask('Would you like to hear more about this rule?');
 });
 
 expressApp.get('/', (req, res) => {
