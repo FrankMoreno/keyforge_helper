@@ -8,11 +8,11 @@ const {dialogflow, BasicCard, Image, Button} = require('actions-on-google');
 const app = dialogflow({debug: true});
 
 const port = process.env.PORT || 9000;
-const data = require('./data.json');
+const cardData = require('./resources/cardData.json');
 
 app.intent('Keyforge Card', (conv, {Card}) => {
     let cardName = Card.toLowerCase();
-    let cardInfo = data[cardName];
+    let cardInfo = cardData[cardName];
     let responseString = `Type - ${cardInfo['Type']}.\nHouse - ${cardInfo['House']}.\nCard Description - ${cardInfo['Card Text']}\nAember - ${cardInfo['\u00c6mber']}.`;
 
     conv.ask(responseString);
@@ -37,7 +37,7 @@ expressApp.get('/', (req, res) => {
 expressApp.get('/cards/:cardName', (req, res) => {
     let cardName = (req.params.cardName).toLowerCase();
     let responseString = {};
-    let cardInfo = data[cardName];
+    let cardInfo = cardData[cardName];
 
     if(cardInfo) {
         responseString = `Type - ${cardInfo['Type']}. 
@@ -50,7 +50,7 @@ expressApp.get('/cards/:cardName', (req, res) => {
 });
 
 expressApp.get('/cards/', (req, res) => {
-    res.json(data);
+    res.json(cardData);
 });
 
 expressApp.post('/fulfillment', app);
