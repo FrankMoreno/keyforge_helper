@@ -27,7 +27,7 @@ app.intent('Keyforge Card', (conv, {Card}) => {
             url: cardInfo['cardLink']
         }),
     }));
-    conv.ask('Would you like to hear about another card?');
+    conv.ask('Would you like to hear about another card or a rule?');
 });
 
 expressApp.get('/', (req, res) => {
