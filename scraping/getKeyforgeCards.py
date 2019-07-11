@@ -96,10 +96,10 @@ def main():
     [thread.start() for thread in threads]
     [thread.join() for thread in threads]
 
-    with open('data.json', 'w') as outfile:
+    with open('./resources/cardData.json', 'w') as outfile:
         json.dump(keyforgeData.cards, outfile)
 
-    with open('Card.json', 'w') as outfile:
+    with open('./resources/Card.json', 'w') as outfile:
         json.dump(keyforgeData.card_names, outfile)
         
 if __name__ == '__main__':
