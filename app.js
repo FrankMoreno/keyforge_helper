@@ -35,7 +35,12 @@ app.intent('Rule Name', (conv, {Rule}) => {
     let ruleInfo = ruleData[Rule][0];
 
     conv.ask(ruleInfo);
-    conv.ask('Would you like to hear more about this rule?');
+    if(ruleData[Rule].length > 1) {
+        conv.ask('Would you like to hear more about this rule?');
+    }
+    else{
+        conv.ask('Would you like to hear about another rule or a card?');
+    }
 });
 
 expressApp.get('/', (req, res) => {
@@ -55,6 +60,13 @@ expressApp.get('/cards/:cardName', (req, res) => {
     }
 
     res.send(responseString);
+});
+
+expressApp.get('/rules/:ruleName', (req, res) => {
+    let ruleName = req.params.ruleName;
+    let ruleInfo = ruleData[ruleName][0];
+
+    res.send(ruleInfo);
 });
 
 expressApp.get('/cards/', (req, res) => {
