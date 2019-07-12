@@ -45,9 +45,8 @@ app.intent('Rule Name', (conv, {Rule}) => {
 
 app.intent('Rule Name - yes', (conv) => {
     const Rule = conv.data.Rule;
-    for(let i = 1; i < ruleData[Rule].length; i++) {
-        conv.ask(ruleData[Rule][i]);
-    }
+    const returnString = ruleData[Rule].splice(1).join(' ');
+    conv.ask(returnString);
     conv.ask('Would you like to hear about another rule or a card?');
 });
 
