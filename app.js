@@ -11,7 +11,7 @@ const port = process.env.PORT || 9000;
 const cardData = require('./resources/cardData.json');
 const ruleData = require('./resources/ruleData.json');
 
-app.intent('Keyforge Card', (conv, {Card}) => {
+app.intent('Card Name', (conv, {Card}) => {
     let cardName = Card.toLowerCase();
     let cardInfo = cardData[cardName];
     let responseString = `Type - ${cardInfo['Type']}.\nHouse - ${cardInfo['House']}.\nCard Description - ${cardInfo['Card Text']}\nAember - ${cardInfo['\u00c6mber']}.`;
@@ -32,6 +32,18 @@ app.intent('Keyforge Card', (conv, {Card}) => {
 });
 
 app.intent('Rule Name', (conv, {Rule}) => {
+    let ruleInfo = ruleData[Rule][0];
+
+    conv.ask(ruleInfo);
+    if(ruleData[Rule].length > 1) {
+        conv.ask('Would you like to hear more about this rule?');
+    }
+    else{
+        conv.ask('Would you like to hear about another rule or a card?');
+    }
+});
+
+app.intent('Rule Name - Tell me more', (conv, {Rule}) => {
     let ruleInfo = ruleData[Rule][0];
 
     conv.ask(ruleInfo);
