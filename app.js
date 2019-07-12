@@ -43,16 +43,9 @@ app.intent('Rule Name', (conv, {Rule}) => {
     }
 });
 
-app.intent('Rule Name - Tell me more', (conv, {Rule}) => {
-    let ruleInfo = ruleData[Rule][0];
-
-    conv.ask(ruleInfo);
-    if(ruleData[Rule].length > 1) {
-        conv.ask('Would you like to hear more about this rule?');
-    }
-    else{
-        conv.ask('Would you like to hear about another rule or a card?');
-    }
+app.intent('Rule Name - yes', (conv, {Rule}) => {
+    conv.ask('Pretend I am saying more about this rule');
+    conv.ask('Would you like to hear about another rule or a card?');
 });
 
 expressApp.get('/', (req, res) => {
