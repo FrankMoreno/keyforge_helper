@@ -32,8 +32,8 @@ app.intent('Card Name', (conv, {Card}) => {
 });
 
 app.intent('Rule Name', (conv, {Rule}) => {
+    conv.data.Rule = Rule;
     let ruleInfo = ruleData[Rule][0];
-
     conv.ask(ruleInfo);
     if(ruleData[Rule].length > 1) {
         conv.ask('Would you like to hear more about this rule?');
@@ -44,8 +44,8 @@ app.intent('Rule Name', (conv, {Rule}) => {
 });
 
 app.intent('Rule Name - yes', (conv) => {
-    const context = conv.contexts.get('projects/keyforge-helper/agent/sessions/ABwppHHxLHgSpBF6mz6qZk6L0yLHGsWuDZJHm2pjmWz_jP6TyqFGmqw-CU7uRY8yR1q8HbIIaWvESGR_urNY/contexts/rulename-followup').parameters['Rule'];
-    conv.ask(context);
+    // const context = conv.contexts.get('projects/keyforge-helper/agent/sessions/ABwppHHxLHgSpBF6mz6qZk6L0yLHGsWuDZJHm2pjmWz_jP6TyqFGmqw-CU7uRY8yR1q8HbIIaWvESGR_urNY/contexts/rulename-followup').parameters['Rule'];
+    conv.ask(conv.data.Rule);
     conv.ask('Would you like to hear about another rule or a card?');
 });
 
