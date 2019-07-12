@@ -41,7 +41,6 @@ app.intent('Rule Name', (conv, {Rule}) => {
 
     conv.ask(ruleInfo);
     if(ruleData[Rule].length > 1) {
-        conv.ask(conv.contexts.get(RuleName.RULE.Rule));
         conv.ask('Would you like to hear more about this rule?');
     }
     else{
