@@ -11,11 +11,6 @@ const port = process.env.PORT || 9000;
 const cardData = require('./resources/cardData.json');
 const ruleData = require('./resources/ruleData.json');
 
-const AppContexts = {
-    Rule: 'number',
-    Card: 'card'
-}
-
 app.intent('Card Name', (conv, {Card}) => {
     let cardName = Card.toLowerCase();
     let cardInfo = cardData[cardName];
@@ -49,7 +44,8 @@ app.intent('Rule Name', (conv, {Rule}) => {
 });
 
 app.intent('Rule Name - yes', (conv) => {
-    conv.ask(conv.contexts.get('RuleName-followup'));
+    const context = conv.contexts.get('RuleName-followup');
+    conv.ask(context.parameters.Rule);
     conv.ask('Would you like to hear about another rule or a card?');
 });
 
