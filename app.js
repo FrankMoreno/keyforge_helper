@@ -41,7 +41,7 @@ app.intent('Rule Name', (conv, {Rule}) => {
 
     conv.ask(ruleInfo);
     if(ruleData[Rule].length > 1) {
-        conv.contexts.set(AppContexts.RULE, Rule);
+        conv.ask(conv.contexts.get(RuleName.RULE.Rule));
         conv.ask('Would you like to hear more about this rule?');
     }
     else{
@@ -50,7 +50,7 @@ app.intent('Rule Name', (conv, {Rule}) => {
 });
 
 app.intent('Rule Name - yes', (conv) => {
-    conv.ask(conv.contexts.get(RuleName.RULE.Rule));
+    conv.ask(conv.contexts.get('RuleName-followup'));
     conv.ask('Would you like to hear about another rule or a card?');
 });
 
