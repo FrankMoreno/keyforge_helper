@@ -44,7 +44,7 @@ app.intent('Rule Name', (conv, {Rule}) => {
 });
 
 app.intent('Rule Name - yes', (conv) => {
-    const context = conv.contexts.get('RuleName-followup').parameters['Rule'];
+    const context = conv.contexts.get('projects/keyforge-helper/agent/sessions/ABwppHHxLHgSpBF6mz6qZk6L0yLHGsWuDZJHm2pjmWz_jP6TyqFGmqw-CU7uRY8yR1q8HbIIaWvESGR_urNY/contexts/rulename-followup').parameters['Rule'];
     conv.ask(context);
     conv.ask('Would you like to hear about another rule or a card?');
 });
