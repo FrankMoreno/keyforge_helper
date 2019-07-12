@@ -44,8 +44,8 @@ app.intent('Rule Name', (conv, {Rule}) => {
 });
 
 app.intent('Rule Name - yes', (conv) => {
-    const context = conv.contexts.get('RuleName-followup').parameters;
-    conv.ask(context['Rule']);
+    const context = conv.contexts.get('RuleName-followup').parameters['Rule'];
+    conv.ask(context);
     conv.ask('Would you like to hear about another rule or a card?');
 });
 
