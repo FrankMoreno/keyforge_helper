@@ -17,8 +17,13 @@
   },
   "homepage": "https://github.com/FrankMoreno/keyforge_helper#readme",
   "dependencies": {
-    "actions-on-google": "^2.7.1",
+    "actions-on-google": "^2.12.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
   }
 }
