@@ -34,6 +34,7 @@ app.intent('Card Name', (conv, { Card }) => {
 });
 
 app.intent('Rule Name', (conv, { Rule }) => {
+  // eslint-disable-next-line no-param-reassign
   conv.data.Rule = Rule;
   const ruleInfo = ruleData[Rule][0];
   conv.ask(ruleInfo);
