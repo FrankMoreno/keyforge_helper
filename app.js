@@ -38,11 +38,12 @@ app.intent('Rule Name', (conv, { Rule }) => {
   conv.data.Rule = Rule;
   const ruleInfo = ruleData[Rule][0];
   conv.ask(ruleInfo);
-  if (ruleData[Rule].length > 1) {
-    conv.ask('Would you like to hear more about this rule?');
-  } else {
-    conv.ask('Would you like to hear about another rule or a card?');
-  }
+  conv.ask('Would you like to hear about another rule or a card?');
+  // if (ruleData[Rule].length > 1) {
+  //   conv.ask('Would you like to hear more about this rule?');
+  // } else {
+  //   conv.ask('Would you like to hear about another rule or a card?');
+  // }
 });
 
 app.intent('Rule Name - yes', (conv) => {
